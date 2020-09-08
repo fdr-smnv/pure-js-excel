@@ -5,8 +5,16 @@
     "browser": true,
     "node": true
   },
+  "settings": {
+    "import/resolver": {
+      "node": {},
+      "webpack": {}
+    }
+  },
   "rules": {
-
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
+    "arrow-parens": "off"
   },
   "extends": [
     "eslint:recommended","airbnb-base"
