@@ -1,4 +1,4 @@
-class Dom {
+export class Dom {
   constructor(selector) {
     this.$el = typeof selector === 'string' ? document.querySelector(selector) : selector;
   }
@@ -44,6 +44,10 @@ class Dom {
     return this.$el.dataset;
   }
 
+  find(selector) {
+    return $(this.$el.querySelector(selector));
+  }
+
   findAll(selector) {
     const foundNodes = this.$el.querySelectorAll(selector);
     const wrappedNodes = [];
@@ -59,6 +63,14 @@ class Dom {
       .forEach(styleName => {
         this.$el.style[styleName] = styles[styleName];
       });
+  }
+
+  addClass(className) {
+    this.$el.classList.add(className);
+  }
+
+  removeClass(className) {
+    this.$el.classList.remove(className);
   }
 }
 
