@@ -31,6 +31,35 @@ class Dom {
     }
     return this;
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  get data() {
+    return this.$el.dataset;
+  }
+
+  findAll(selector) {
+    const foundNodes = this.$el.querySelectorAll(selector);
+    const wrappedNodes = [];
+
+    foundNodes.forEach(node => wrappedNodes.push($(node)));
+
+    return wrappedNodes;
+  }
+
+  css(styles) {
+    Object
+      .keys(styles)
+      .forEach(styleName => {
+        this.$el.style[styleName] = styles[styleName];
+      });
+  }
 }
 
 export function $(selector) {
