@@ -5,13 +5,11 @@ export function resizeHandler(event, $root) {
   const $parent = $resizer.closest('[data-type="resizable"]');
   const coords = $parent.getCoords();
   const isCol = event.target.dataset.resize === 'col';
-  const tableWidth = $root.$el.offsetWidth;
-  const tableHeight = $root.$el.offsetHeight;
+  const [tableWidth, tableHeight] = [$root.$el.offsetWidth, $root.$el.offsetHeight];
   let newWidth; let newHeight;
   $resizer.css({
     opacity: 1,
-    bottom: isCol ? `-${tableHeight}px` : 0,
-    right: isCol ? 0 : `-${tableWidth}px`,
+    [isCol ? 'bottom' : 'right']: isCol ? `-${tableHeight}px` : `-${tableWidth}px`,
   });
 
   document.onmousemove = e => {
