@@ -16,7 +16,8 @@
     "import/prefer-default-export": "off",
     "arrow-parens": "off",
     "no-use-before-define": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "default-case": "off"
   },
   "extends": [
     "eslint:recommended","airbnb-base"

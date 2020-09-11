@@ -6,8 +6,20 @@ export class Dom {
   html(html) {
     if (typeof html === 'string') {
       this.$el.innerHTML = html;
+      return this;
     }
     return this.$el.outerHTML.trim();
+  }
+
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text;
+      return this;
+    }
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim();
+    }
+    return this.$el.textContent.trim();
   }
 
   on(eventType, callback) {
@@ -20,6 +32,7 @@ export class Dom {
 
   clear() {
     this.html('');
+    return this;
   }
 
   append(node) {
@@ -63,14 +76,34 @@ export class Dom {
       .forEach(styleName => {
         this.$el.style[styleName] = styles[styleName];
       });
+    return this;
+  }
+
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':');
+      return {
+        row: Number(parsed[0]),
+        col: Number(parsed[1]),
+      };
+    }
+
+    return this.data.id;
+  }
+
+  focus() {
+    this.$el.focus();
+    return this;
   }
 
   addClass(className) {
     this.$el.classList.add(className);
+    return this;
   }
 
   removeClass(className) {
     this.$el.classList.remove(className);
+    return this;
   }
 }
 
