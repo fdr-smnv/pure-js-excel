@@ -12,14 +12,14 @@ import { initialStorage } from '@/redux/initialState';
 const store = createStore(rootReducer, initialStorage);
 
 const stateListener = debounce(state => {
-  storage('excel-state', state);
+	storage('excel-state', state);
 }, 300);
 
 store.subscribe(stateListener);
 
 const excel = new Excel('#app', {
-  components: [Header, Toolbar, Formula, Table],
-  store,
+	components: [Header, Toolbar, Formula, Table],
+	store,
 });
 
 excel.render();
