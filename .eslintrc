@@ -17,7 +17,10 @@
     "arrow-parens": "off",
     "no-use-before-define": "off",
     "no-param-reassign": "off",
-    "default-case": "off"
+    "default-case": "off",
+    "no-tabs": "off",
+    // "indent": ["error", "tab"],
+    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
   },
   "extends": [
     "eslint:recommended","airbnb-base"

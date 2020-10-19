@@ -8,6 +8,7 @@ export class Formula extends ExcelComponent {
     super($root, {
       name: 'Formula',
       listeners: ['input', 'keydown'],
+      subscribe: ['currentText'],
       ...options,
     });
   }
@@ -17,8 +18,7 @@ export class Formula extends ExcelComponent {
 
     this.$formula = this.$root.find('#formula');
 
-    this.$on('table:select', ($cell) => this.$formula.text($cell.text()));
-    this.$on('table:input', ($cell) => this.$formula.text($cell.text()));
+    this.$on('table:select', ($cell) => this.$formula.text($cell.data.value));
   }
 
   toHTML() {
@@ -26,6 +26,30 @@ export class Formula extends ExcelComponent {
             <div class="info">fx</div>
             <div class="input" id="formula" contenteditable spellcheck="false"></div>
         `;
+  }
+
+  storeChanged({ currentText }) {
+    const selection = window.getSelection();
+
+    const isParentFormula = selection.focusNode.parentNode.getAttribute('id') === 'formula';
+    const formulaElementValue = this.$formula.$el.childNodes[0]
+    && this.$formula.$el.childNodes[0].nodeValue;
+
+    this.$formula.text(currentText);
+
+    if (isParentFormula && formulaElementValue) {
+      const caretPosition = selection.focusNode.textContent.length > selection.anchorOffset
+        ? selection.focusNode.textContent.length
+        : selection.anchorOffset;
+      this.saveCaretPosition(caretPosition, selection);
+    }
+  }
+
+  saveCaretPosition(caretPosition, selection) {
+    const range = document.createRange();
+    range.setStart(this.$formula.$el.childNodes[0], caretPosition);
+    selection.removeAllRanges();
+    selection.addRange(range);
   }
 
   onInput(event) {

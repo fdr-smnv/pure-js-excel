@@ -1,3 +1,7 @@
+import { defaultTitle } from '@/constants';
+import { $ } from '@/core/Dom';
+import { debounce } from '@/core/utils';
+import { changeTitle } from '@/redux/actions';
 import { ExcelComponent } from '@core/ExcelComponent';
 
 export class Header extends ExcelComponent {
@@ -6,14 +10,16 @@ export class Header extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Header',
+      listeners: ['input'],
+      subscribe: ['title'],
       ...options,
     });
   }
 
   toHTML() {
+    const title = this.store.getState().title || defaultTitle;
     return `
-
-            <input type="text" class="input" value="Новая таблица">
+            <input type="text" class="input" value="${title}">
             <div>
                 <div class="button">
                         <span class="material-icons">
@@ -28,5 +34,13 @@ export class Header extends ExcelComponent {
             </div>
 
         `;
+  }
+
+  prepare() {
+    this.onInput = debounce(this.onInput, 300);
+  }
+
+  onInput(event) {
+    this.$dispatch(changeTitle($(event.target).text()));
   }
 }
