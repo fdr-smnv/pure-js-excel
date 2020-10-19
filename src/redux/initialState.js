@@ -1,23 +1,23 @@
 import { defaultStyles, defaultTitle } from '@/constants';
 
-const defaultState = {
-	colState: {},
-	rowState: {},
-	cellState: {},
-	stylesState: {},
-	currentText: '',
-	title: defaultTitle,
-	currentStyles: defaultStyles,
-	lastOpened: Date.now().toString(),
-};
-
 const normalize = state => ({
 	...state,
 	currentStyles: defaultStyles,
 	currentText: '',
-	lastOpened: Date.now().toString,
+	lastOpened: Date().toString(),
 });
 
 export function normalizeInitialState(state) {
+	const defaultState = {
+		colState: {},
+		rowState: {},
+		cellState: {},
+		stylesState: {},
+		currentText: '',
+		title: defaultTitle,
+		currentStyles: defaultStyles,
+		lastOpened: Date().toString(),
+	};
+
 	return state ? normalize(state) : { ...defaultState };
 }
