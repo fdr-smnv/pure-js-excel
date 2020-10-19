@@ -45,8 +45,9 @@ export function resizeHandler(event, $root) {
       document.onmouseup = null;
 
       resolve({
+        type: isCol ? 'col' : 'row',
         value,
-        id: isCol ? $parent.data.col : null,
+        id: isCol ? $parent.data.col : $parent.data.row,
       });
     };
   }));
