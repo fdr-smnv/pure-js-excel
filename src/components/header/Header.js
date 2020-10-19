@@ -5,20 +5,20 @@ import { changeTitle } from '@/redux/actions';
 import { ExcelComponent } from '@core/ExcelComponent';
 
 export class Header extends ExcelComponent {
-  static className = 'excel__header'
+	static className = 'excel__header'
 
-  constructor($root, options) {
-    super($root, {
-      name: 'Header',
-      listeners: ['input'],
-      subscribe: ['title'],
-      ...options,
-    });
-  }
+	constructor($root, options) {
+		super($root, {
+			name: 'Header',
+			listeners: ['input'],
+			subscribe: ['title'],
+			...options,
+		});
+	}
 
-  toHTML() {
-    const title = this.store.getState().title || defaultTitle;
-    return `
+	toHTML() {
+		const title = this.store.getState().title || defaultTitle;
+		return `
             <input type="text" class="input" value="${title}">
             <div>
                 <div class="button">
@@ -34,13 +34,13 @@ export class Header extends ExcelComponent {
             </div>
 
         `;
-  }
+	}
 
-  prepare() {
-    this.onInput = debounce(this.onInput, 300);
-  }
+	prepare() {
+		this.onInput = debounce(this.onInput, 300);
+	}
 
-  onInput(event) {
-    this.$dispatch(changeTitle($(event.target).text()));
-  }
+	onInput(event) {
+		this.$dispatch(changeTitle($(event.target).text()));
+	}
 }
