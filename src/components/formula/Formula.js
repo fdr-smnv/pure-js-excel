@@ -19,9 +19,6 @@ export class Formula extends ExcelComponent {
     this.$formula = this.$root.find('#formula');
 
     this.$on('table:select', ($cell) => this.$formula.text($cell.data.value));
-    // this.$on('table:input', ($cell) => {
-    //   this.$formula.text($cell.text());
-    // });
   }
 
   toHTML() {
@@ -32,9 +29,7 @@ export class Formula extends ExcelComponent {
   }
 
   storeChanged({ currentText }) {
-    console.log('Current text', currentText);
     const selection = window.getSelection();
-    // const caretPosition = selection.anchorOffset;
 
     const isParentFormula = selection.focusNode.parentNode.getAttribute('id') === 'formula';
     const formulaElementValue = this.$formula.$el.childNodes[0]
@@ -43,7 +38,6 @@ export class Formula extends ExcelComponent {
     this.$formula.text(currentText);
 
     if (isParentFormula && formulaElementValue) {
-      console.log(selection.focusNode.textContent);
       const caretPosition = selection.focusNode.textContent.length > selection.anchorOffset
         ? selection.focusNode.textContent.length
         : selection.anchorOffset;

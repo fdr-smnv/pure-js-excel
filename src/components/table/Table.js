@@ -109,7 +109,6 @@ export class Table extends ExcelComponent {
       const currId = this.selection.current.id(true);
       const $next = this.$root.find(nextSelector(event.key, currId));
       this.selectCell($next);
-      console.log($next);
     }
   }
 
@@ -118,7 +117,6 @@ export class Table extends ExcelComponent {
     const idObj = this.selection.current.id(true);
     const id = `${idObj.row}:${idObj.col}`;
     const value = $(event.target).text();
-    console.log(id);
     this.$dispatch(action.setCellText({ id, value }));
   }
 }

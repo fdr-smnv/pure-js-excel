@@ -29,18 +29,14 @@ export class Toolbar extends ExcelStateComponent {
 
   storeChanged(changes) {
     this.setState(changes.currentStyles);
-    console.log(changes);
   }
 
   onClick(event) {
-    console.log('click');
     const $target = $(event.target);
     if ($target.data.type === 'button') {
       const value = JSON.parse($target.data.value);
       this.$emit('toolbar:applyStyle', value);
       this.setState(value);
-      console.log('Toolbar button click!', $target.data.value);
-      console.log('Current state', this.state);
     }
   }
 }

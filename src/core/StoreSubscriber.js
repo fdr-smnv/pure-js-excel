@@ -16,7 +16,6 @@ export class StoreSubscriber {
             if (component.isWatching(key)) {
               const changes = { [key]: state[key] };
               component.storeChanged(changes);
-              console.log(changes);
             }
           });
         }
