@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
-		"build": "cross-env NODE_ENV=production webpack --mode production",
-		"lint": "eslint ./src"
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+		"lint": "eslint ./src",
+		"prettier": "prettier --write \"**/*.js\""
   },
   "browserslist": "> 0.25%, not dead",
   "repository": {
@@ -39,11 +40,14 @@
     "css-loader": "4.2.2",
     "eslint": "7.2.0",
     "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-prettier": "6.13.0",
     "eslint-import-resolver-webpack": "0.12.2",
     "eslint-loader": "4.0.2",
     "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-prettier": "3.1.4",
     "html-webpack-plugin": "4.4.1",
     "mini-css-extract-plugin": "0.11.0",
+    "prettier": "2.1.2",
     "sass": "1.26.10",
     "sass-loader": "10.0.2",
     "webpack": "4.44.1",
