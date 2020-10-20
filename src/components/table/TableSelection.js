@@ -1,5 +1,5 @@
 export class TableSelection {
-	static className = 'selected'
+	static className = 'selected';
 
 	constructor() {
 		this.group = [];

@@ -2,7 +2,10 @@ import { ExcelComponent } from '@core/ExcelComponent';
 import { createTable } from '@/components/table/table.template';
 import { resizeHandler } from '@/components/table/table.resize';
 import {
-	shouldResize, isCell, cellIdsMatrix, nextSelector,
+	shouldResize,
+	isCell,
+	cellIdsMatrix,
+	nextSelector,
 } from '@/components/table/table.functions';
 import { TableSelection } from '@/components/table/TableSelection';
 import { $ } from '@core/Dom';
@@ -11,7 +14,7 @@ import { defaultStyles } from '@/constants';
 import { parse } from '@/core/parse';
 
 export class Table extends ExcelComponent {
-	static className = 'excel__table'
+	static className = 'excel__table';
 
 	constructor($root, options) {
 		super($root, {
@@ -34,29 +37,31 @@ export class Table extends ExcelComponent {
 
 		this.selectCell(this.$root.find('[data-id="0:0"]'));
 
-		this.$on('formula:input', (value) => {
+		this.$on('formula:input', value => {
 			if (typeof value === 'string') {
-				this.selection.current
-					.attr('data-value', value)
-					.text(parse(value));
+				this.selection.current.attr('data-value', value).text(parse(value));
 				this.updateTextInStore(value);
 			}
 		});
 		this.$on('formula:done', () => this.selection.current.focus());
 		this.$on('toolbar:applyStyle', value => {
 			this.selection.applyStyle(value);
-			this.$dispatch(action.applyStyle({
-				value,
-				ids: this.selection.selectedIds,
-			}));
+			this.$dispatch(
+				action.applyStyle({
+					value,
+					ids: this.selection.selectedIds,
+				})
+			);
 		});
 	}
 
 	updateTextInStore(value) {
-		this.$dispatch(action.setCellText({
-			id: this.selection.current.id(),
-			value,
-		}));
+		this.$dispatch(
+			action.setCellText({
+				id: this.selection.current.id(),
+				value,
+			})
+		);
 	}
 
 	selectCell($cell) {
@@ -85,8 +90,9 @@ export class Table extends ExcelComponent {
 			const $target = $(event.target);
 
 			if (event.shiftKey) {
-				const $cells = cellIdsMatrix(this.selection.current, $target)
-					.map(id => this.$root.find(`[data-id="${id}"]`));
+				const $cells = cellIdsMatrix(this.selection.current, $target).map(id =>
+					this.$root.find(`[data-id="${id}"]`)
+				);
 				this.selection.selectGroup($cells);
 			} else {
 				this.selectCell($target);
@@ -95,14 +101,7 @@ export class Table extends ExcelComponent {
 	}
 
 	onKeydown(event) {
-		const keys = [
-			'Enter',
-			'Tab',
-			'ArrowUp',
-			'ArrowRight',
-			'ArrowDown',
-			'ArrowLeft',
-		];
+		const keys = ['Enter', 'Tab', 'ArrowUp', 'ArrowRight', 'ArrowDown', 'ArrowLeft'];
 
 		if (keys.includes(event.key) && !event.shiftKey) {
 			event.preventDefault();

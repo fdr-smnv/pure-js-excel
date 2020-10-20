@@ -20,7 +20,7 @@ function toCell(row, { colState, cellState, stylesState }) {
         data-col="${col}"
         data-id="${id}"
         data-value="${data}"
-        ${colState[col] ? (`style="${styles}; width: ${colState[col]}px;"`) : `style="${styles};"`}
+        ${colState[col] ? `style="${styles}; width: ${colState[col]}px;"` : `style="${styles};"`}
     >${parse(data)}</div>
 `;
 	};
@@ -33,7 +33,7 @@ function toColumn(state) {
           class="column" 
           data-type="resizable" 
           data-col=${index} 
-          ${state[index] ? (`style="width: ${state[index]}px;"`) : ''}
+          ${state[index] ? `style="width: ${state[index]}px;"` : ''}
         >
             ${col}
             <div class="col-resize" data-resize="col"></div>
@@ -47,7 +47,7 @@ function createRow(index, content, state) {
       class="row"
       data-type="resizable"
       data-row="${index}"
-      ${state[index] ? (`style="height: ${state[index]}px;"`) : ''}
+      ${state[index] ? `style="height: ${state[index]}px;"` : ''}
     >
         <div class="row-info">
             ${index || ''}
@@ -66,19 +66,12 @@ export function createTable(rowsCount = 15, state) {
 	const colsCount = CODES.Z - CODES.A + 1;
 	const rows = [];
 
-	const cols = new Array(colsCount)
-		.fill('')
-		.map(toChar)
-		.map(toColumn(state.colState))
-		.join('');
+	const cols = new Array(colsCount).fill('').map(toChar).map(toColumn(state.colState)).join('');
 
 	rows.push(createRow(0, cols, state.rowState));
 
 	for (let row = 0; row < rowsCount; row += 1) {
-		const cells = new Array(colsCount)
-			.fill('')
-			.map(toCell(row, state))
-			.join('');
+		const cells = new Array(colsCount).fill('').map(toCell(row, state)).join('');
 
 		rows.push(createRow(row + 1, cells, state.rowState));
 	}

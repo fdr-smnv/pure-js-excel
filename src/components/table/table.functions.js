@@ -10,9 +10,7 @@ export function range(start, end) {
 	if (start > end) {
 		[start, end] = [end, start];
 	}
-	return new Array(end - start + 1)
-		.fill('')
-		.map((_, index) => start + index);
+	return new Array(end - start + 1).fill('').map((_, index) => start + index);
 }
 
 export function cellIdsMatrix($target, $current) {
@@ -31,12 +29,17 @@ export function cellIdsMatrix($target, $current) {
 export function nextSelector(key, { row, col }) {
 	const MIN_VALUE = 0;
 	switch (key) {
-	case 'ArrowUp': return `[data-id="${row - 1 < MIN_VALUE ? MIN_VALUE : row - 1}:${col}"]`;
-	case 'ArrowRight':
-	case 'Tab': return `[data-id="${row}:${col + 1}"]`;
-	case 'Enter':
-	case 'ArrowDown': return `[data-id="${row + 1}:${col}"]`;
-	case 'ArrowLeft': return `[data-id="${row}:${col - 1 < MIN_VALUE ? MIN_VALUE : col - 1}"]`;
-	default: return `[data-id="${row}:${col}"]`;
+		case 'ArrowUp':
+			return `[data-id="${row - 1 < MIN_VALUE ? MIN_VALUE : row - 1}:${col}"]`;
+		case 'ArrowRight':
+		case 'Tab':
+			return `[data-id="${row}:${col + 1}"]`;
+		case 'Enter':
+		case 'ArrowDown':
+			return `[data-id="${row + 1}:${col}"]`;
+		case 'ArrowLeft':
+			return `[data-id="${row}:${col - 1 < MIN_VALUE ? MIN_VALUE : col - 1}"]`;
+		default:
+			return `[data-id="${row}:${col}"]`;
 	}
 }

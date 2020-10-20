@@ -71,11 +71,9 @@ export class Dom {
 	}
 
 	css(styles) {
-		Object
-			.keys(styles)
-			.forEach(styleName => {
-				this.$el.style[styleName] = styles[styleName];
-			});
+		Object.keys(styles).forEach(styleName => {
+			this.$el.style[styleName] = styles[styleName];
+		});
 		return this;
 	}
 

@@ -17,9 +17,7 @@ export class DomListener {
 		this.listeners.forEach(listener => {
 			const method = getMethodName(listener);
 			if (!this[method]) {
-				throw new Error(
-					`Method ${method} is not implemented is ${this.name || ''} Component`,
-				);
+				throw new Error(`Method ${method} is not implemented is ${this.name || ''} Component`);
 			}
 			this[method] = this[method].bind(this);
 			this.$root.on(listener, this[method]);

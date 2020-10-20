@@ -6,7 +6,7 @@ import { changeTitle } from '@/redux/actions';
 import { ExcelComponent } from '@core/ExcelComponent';
 
 export class Header extends ExcelComponent {
-	static className = 'excel__header'
+	static className = 'excel__header';
 
 	constructor($root, options) {
 		super($root, {
@@ -49,8 +49,7 @@ export class Header extends ExcelComponent {
 		const $target = $(event.target);
 
 		if ($target.data.button === 'remove') {
-			// eslint-disable-next-line
-			const removeDecision = confirm('Вы действительно хотите удалить таблицу?');
+			const removeDecision = window.confirm('Вы действительно хотите удалить таблицу?');
 
 			if (removeDecision) {
 				localStorage.removeItem(`excel:${ActiveRoute.params}`);

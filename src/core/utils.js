@@ -18,7 +18,7 @@ export function isEqual(a, b) {
 }
 
 function camelToDash(str) {
-	return str.replace(/([A-Z])/g, ($1) => `-${$1.toLowerCase()}`);
+	return str.replace(/([A-Z])/g, $1 => `-${$1.toLowerCase()}`);
 }
 
 export function toInlineStyles(styles) {
