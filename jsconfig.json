@@ -5,5 +5,8 @@
             "@/*": ["./*"],
             "@core/*": ["./core/*"]
         }
-    }
+		},
+		"typeAcquisition": {
+			"include": ["jest"]
+		}
 }

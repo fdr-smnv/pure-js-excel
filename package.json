@@ -4,11 +4,12 @@
   "description": "Pure Javascript Excel Application",
   "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
     "build": "cross-env NODE_ENV=production webpack --mode production",
-		"lint": "eslint ./src",
-		"prettier": "prettier --write \"**/*.js\""
+    "lint": "eslint ./src",
+    "prettier": "prettier --write \"**/*.js\""
   },
   "browserslist": "> 0.25%, not dead",
   "repository": {
@@ -46,6 +47,7 @@
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-prettier": "3.1.4",
     "html-webpack-plugin": "4.4.1",
+    "jest": "26.6.0",
     "mini-css-extract-plugin": "0.11.0",
     "prettier": "2.1.2",
     "sass": "1.26.10",
@@ -55,6 +57,8 @@
     "webpack-dev-server": "3.11.0"
   },
   "dependencies": {
+    "@types/jest": "26.0.15",
+    "eslint-plugin-jest": "24.1.0",
     "normalize.css": "8.0.1"
   }
 }
