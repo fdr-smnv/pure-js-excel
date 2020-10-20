@@ -4,7 +4,7 @@ import { $ } from '@/core/Dom';
 import { ExcelStateComponent } from '@/core/ExcelStateComponent';
 
 export class Toolbar extends ExcelStateComponent {
-	static className = 'excel__toolbar'
+	static className = 'excel__toolbar';
 
 	constructor($root, options) {
 		super($root, {

@@ -2,7 +2,7 @@ import { ExcelComponent } from '@core/ExcelComponent';
 import { $ } from '@core/Dom';
 
 export class Formula extends ExcelComponent {
-	static className = 'excel__formula'
+	static className = 'excel__formula';
 
 	constructor($root, options) {
 		super($root, {
@@ -18,7 +18,7 @@ export class Formula extends ExcelComponent {
 
 		this.$formula = this.$root.find('#formula');
 
-		this.$on('table:select', ($cell) => this.$formula.text($cell.data.value));
+		this.$on('table:select', $cell => this.$formula.text($cell.data.value));
 	}
 
 	toHTML() {
@@ -32,15 +32,16 @@ export class Formula extends ExcelComponent {
 		const selection = window.getSelection();
 
 		const isParentFormula = selection.focusNode.parentNode.getAttribute('id') === 'formula';
-		const formulaElementValue = this.$formula.$el.childNodes[0]
-			&& this.$formula.$el.childNodes[0].nodeValue;
+		const formulaElementValue =
+			this.$formula.$el.childNodes[0] && this.$formula.$el.childNodes[0].nodeValue;
 
 		this.$formula.text(currentText);
 
 		if (isParentFormula && formulaElementValue) {
-			const caretPosition = selection.focusNode.textContent.length > selection.anchorOffset
-				? selection.focusNode.textContent.length
-				: selection.anchorOffset;
+			const caretPosition =
+				selection.focusNode.textContent.length > selection.anchorOffset
+					? selection.focusNode.textContent.length
+					: selection.anchorOffset;
 			this.saveCaretPosition(caretPosition, selection);
 		}
 	}
