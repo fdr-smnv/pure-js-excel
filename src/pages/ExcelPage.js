@@ -19,21 +19,14 @@ export class ExcelPage extends Page {
 	}
 
 	async getRoot() {
-		// const params = this.params || Date.now().toString();
-
-		// const state = storage(`excel:${params}`);
 		const state = await this.processor.get();
 		const store = createStore(rootReducer, normalizeInitialState(state));
-
-		// const stateListener = debounce(s => {
-		// 	storage(`excel:${params}`, s);
-		// }, 300);
-
 		this.storeSub = store.subscribe(this.processor.listen);
 
 		this.excel = new Excel({
 			components: [Header, Toolbar, Formula, Table],
 			store,
+			processor: this.processor,
 		});
 
 		return this.excel.getRoot();

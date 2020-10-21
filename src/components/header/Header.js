@@ -52,7 +52,7 @@ export class Header extends ExcelComponent {
 			const removeDecision = window.confirm('Вы действительно хотите удалить таблицу?');
 
 			if (removeDecision) {
-				localStorage.removeItem(storageName(ActiveRoute.params));
+				this.processor.removeItem(storageName(ActiveRoute.params));
 				ActiveRoute.navigateHash('');
 			}
 		} else if ($target.data.button === 'exit') {

@@ -1,8 +1,16 @@
 import { $ } from '@/core/Dom';
 import { Page } from '@/core/page/Page';
+import { StateProcessor } from '@/core/page/StateProcessor';
 import { createRecordsTable } from '@/shared/dashboard.functions';
+import { LocalStorageClient } from '@/shared/LocalStorageClient';
 
 export class DashboardPage extends Page {
+	constructor(params) {
+		super(params);
+
+		this.processor = new StateProcessor(new LocalStorageClient(this.params));
+	}
+
 	getRoot() {
 		return $.create('div', 'db').html(`
 		<div class="db__header">
@@ -16,7 +24,7 @@ export class DashboardPage extends Page {
 				</div>
 		</div>
 		<div class="db__table db__view">
-			${createRecordsTable()}
+			${createRecordsTable(this.processor)}
 		</div>
 		`);
 	}

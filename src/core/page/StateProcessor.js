@@ -13,4 +13,12 @@ export class StateProcessor {
 	get() {
 		return this.client.get();
 	}
+
+	removeItem(key) {
+		this.client.removeItem(key);
+	}
+
+	getAllTables() {
+		return this.client.getAllTables();
+	}
 }
