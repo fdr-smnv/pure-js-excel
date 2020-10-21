@@ -65,13 +65,16 @@ export class Table extends ExcelComponent {
 	}
 
 	selectCell($cell) {
-		this.selection.select($cell);
-		const id = this.selection.current.id(true);
 		const value = $cell.text();
+
+		this.selection.select($cell);
+		$cell.attr('data-value', value);
+
+		const id = this.selection.current.id(true);
 		this.$dispatch(action.setCellText({ id, value }));
+
 		const styles = $cell.getStyles(Object.keys(defaultStyles));
 		this.$dispatch(action.changeStyles(styles));
-		this.$emit('table:select', $cell);
 	}
 
 	async resizeTable(event) {
@@ -112,7 +115,6 @@ export class Table extends ExcelComponent {
 	}
 
 	onInput(event) {
-		this.$emit('table:input', $(event.target));
 		const idObj = this.selection.current.id(true);
 		const id = `${idObj.row}:${idObj.col}`;
 		const value = $(event.target).text();
