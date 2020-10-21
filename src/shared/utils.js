@@ -38,3 +38,7 @@ export function debounce(fn, wait) {
 		timeout = setTimeout(later, wait);
 	};
 }
+
+export function storageName(params) {
+	return `excel:${params}`;
+}

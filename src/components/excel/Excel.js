@@ -6,6 +6,7 @@ export class Excel {
 	constructor(options) {
 		this.components = options.components || [];
 		this.store = options.store;
+		this.processor = options.processor;
 		this.emitter = new Emitter();
 		this.subscriber = new StoreSubscriber(this.store);
 	}
@@ -15,6 +16,7 @@ export class Excel {
 		const componentOptions = {
 			emitter: this.emitter,
 			store: this.store,
+			processor: this.processor,
 		};
 		this.components = this.components.map(Component => {
 			const $el = $.create('div', Component.className);

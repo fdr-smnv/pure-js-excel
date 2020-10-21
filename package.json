@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "@types/jest": "26.0.15",
+    "babel-plugin-module-resolver": "4.0.0",
     "eslint-plugin-jest": "24.1.0",
     "normalize.css": "8.0.1"
   }
