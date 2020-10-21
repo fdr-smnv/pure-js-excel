@@ -1,6 +1,6 @@
-import { $ } from '../Dom';
-import { ActiveRoute } from './ActiveRoute';
-// import { ActiveRoute } from '@/core/routes/ActiveRoute';
+import { Loader } from '@/components/loader/Loader';
+import { $ } from '@core/Dom';
+import { ActiveRoute } from '@core/routes/ActiveRoute';
 
 export class Router {
 	constructor(selector, routes) {
@@ -12,6 +12,7 @@ export class Router {
 		this.changePageHandler = this.changePageHandler.bind(this);
 		this.routes = routes;
 		this.lastPage = null;
+		this.loader = new Loader();
 
 		this.init();
 	}
@@ -21,18 +22,19 @@ export class Router {
 		this.changePageHandler();
 	}
 
-	changePageHandler() {
+	async changePageHandler() {
 		if (this.lastPage) {
 			this.lastPage.destroy();
 		}
 
-		this.$placeholder.clear();
+		this.$placeholder.clear().append(this.loader);
 
 		const PageComponent = ActiveRoute.path.includes('excel')
 			? this.routes.excel
 			: this.routes.dashboard;
 		this.lastPage = new PageComponent(ActiveRoute.params);
-		this.$placeholder.append(this.lastPage.getRoot());
+		const root = await this.lastPage.getRoot();
+		this.$placeholder.clear().append(root);
 		this.lastPage.afterRender();
 	}
 
