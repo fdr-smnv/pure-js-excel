@@ -4,8 +4,6 @@ export function rootReducer(state, { type, data }) {
 	switch (type) {
 		case TABLE_RESIZE: {
 			const field = data.type === 'col' ? 'colState' : 'rowState';
-			// const prevState = state[field] || {};
-			// prevState[data.id] = data.value;
 			return { ...state, [field]: value(state, field, data) };
 		}
 		case CHANGE_TEXT: {

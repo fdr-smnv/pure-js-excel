@@ -14,7 +14,6 @@ function toHTML(acc, table) {
 
 export function createRecordsTable(processor) {
 	const allTables = processor.getAllTables();
-	console.log(allTables);
 
 	if (!allTables.length) {
 		return '<p>Вы пока не создали ни одной таблицы</p>';
