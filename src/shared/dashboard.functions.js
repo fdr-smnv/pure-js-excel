@@ -1,7 +1,7 @@
 function toHTML(key) {
 	const currentRecord = JSON.parse(localStorage.getItem(key));
 	const param = key.split(':')[1];
-	const date = new Date(Number(currentRecord.lastOpened)).toLocaleDateString();
+	const date = new Date(currentRecord.lastOpened).toLocaleDateString();
 	return `<li class="db__record">
 						 <a href="#excel/${param}">${currentRecord.title}</a>
 						 <strong>${date}</strong>

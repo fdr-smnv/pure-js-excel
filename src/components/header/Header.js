@@ -1,7 +1,7 @@
 import { defaultTitle } from '@/constants';
 import { $ } from '@/core/Dom';
 import { ActiveRoute } from '@/core/routes/ActiveRoute';
-import { debounce } from '@/core/utils';
+import { debounce, storageName } from '@/shared/utils';
 import { changeTitle } from '@/redux/actions';
 import { ExcelComponent } from '@core/ExcelComponent';
 
@@ -52,7 +52,7 @@ export class Header extends ExcelComponent {
 			const removeDecision = window.confirm('Вы действительно хотите удалить таблицу?');
 
 			if (removeDecision) {
-				localStorage.removeItem(`excel:${ActiveRoute.params}`);
+				localStorage.removeItem(storageName(ActiveRoute.params));
 				ActiveRoute.navigateHash('');
 			}
 		} else if ($target.data.button === 'exit') {
